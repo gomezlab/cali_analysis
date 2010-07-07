@@ -17,8 +17,7 @@ i_p.parse(I_folder,cali_time,distance_bin_sizes,pixel_size,varargin{:});
 
 cell_edge_id_threshold = i_p.Results.cell_edge_id_threshold;
 
-global status_text_hnd;
-set(status_text_hnd,'String','Gathering Data...'); drawnow;
+send_message('Gathering Data...');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main Program
@@ -27,17 +26,18 @@ image_files = dir(fullfile(I_folder,'*.tif*'));
 
 pixels_at_dists_pre = cell(10000,1);
 pixels_at_dists_post = cell(10000,1);
+dist_means = [];
 
 for k = 1:length(image_files)
     
     I_file = fullfile(I_folder,image_files(k).name);
     
+    [path, name, ext] = fileparts(I_file);
+    
     image_num = length(imfinfo(I_file));
     
-    cell_highlight_movie = avifile(fullfile(fileparts(I_file),'mask_highlight.avi'));
-    dist_highlight_movie = avifile(fullfile(fileparts(I_file),'dist_highlight.avi'));
-    
-    dist_means = [];
+    cell_highlight_movie = avifile(fullfile(fileparts(I_file),[name,'_mask_highlight.avi']));
+    dist_highlight_movie = avifile(fullfile(fileparts(I_file),[name,'_dist_highlight.avi']));
     
     for i=1:image_num
         
@@ -79,8 +79,7 @@ for k = 1:length(image_files)
             end
         end
         if (mod(i,10) == 0)
-            set(status_text_hnd,'String',['STATUS: Done with frame ',num2str(i), '/', num2str(image_num), ' in ', image_files(k).name]);
-            drawnow;
+            send_message(['STATUS: Done with frame ',num2str(i), '/', num2str(image_num), ' in ', image_files(k).name]);
         end
     end
         
@@ -89,9 +88,7 @@ for k = 1:length(image_files)
     
 end
 
-set(status_text_hnd,'String',['STATUS: done examining image data']);
-drawnow;
-
+send_message(['STATUS: done examining image data']);
 
 while (isempty(pixels_at_dists_pre{end}))
     pixels_at_dists_pre = pixels_at_dists_pre(1:(end - 1));

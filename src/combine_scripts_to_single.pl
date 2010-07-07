@@ -15,7 +15,6 @@ GetOptions(\%opt, "template=s", "debug|d") or die;
 ################################################################################
 # Main
 ################################################################################
-
 my $revision_num = &get_revision_number();
 
 open INPUT, "$opt{template}" or die $!;
@@ -43,10 +42,12 @@ for (<$template_dirname/*>) {
 	push @files_text, "\n\n";
 }
 
-for (<"shared/*">) {
+for (<shared/*>) {
 	if ($_ =~ /$template_filename/) {
 		next;
 	}
+
+	print $_,"\n";
 
 	open INPUT, "$_" or die "$!";
 	push @files_text, <INPUT>;
@@ -55,8 +56,8 @@ for (<"shared/*">) {
 	push @files_text, "\n\n";
 }
 
-my $output_file = "temp.m";
-if ($opt{template} =~ /(.*\/.*)_template.m/) {
+my $output_file = $template_filename;
+if ($template_filename =~ /(.*)_template.m/) {
 	$output_file = $1 . ".m";
 }
 

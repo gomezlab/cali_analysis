@@ -17,6 +17,10 @@ i_p.parse(I_folder,cali_time,distance_bin_sizes,pixel_size,varargin{:});
 
 cell_edge_id_threshold = i_p.Results.cell_edge_id_threshold;
 
+if (exist(fullfile('..','shared'),'dir') == 7)
+    addpath(fullfile('..','shared'));
+end
+
 send_message('Gathering Data...');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

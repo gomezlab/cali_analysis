@@ -12,6 +12,8 @@ my %opt;
 $opt{debug} = 0;
 GetOptions(\%opt, "template=s", "debug|d") or die;
 
+die "Unable to find template file (-template)" if not exists $opt{template};
+
 ################################################################################
 # Main
 ################################################################################
@@ -46,8 +48,6 @@ for (<shared/*>) {
 	if ($_ =~ /$template_filename/) {
 		next;
 	}
-
-	print $_,"\n";
 
 	open INPUT, "$_" or die "$!";
 	push @files_text, <INPUT>;

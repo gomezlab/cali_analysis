@@ -11,7 +11,11 @@ global status_text_hnd;
 if (isempty(status_text_hnd))
     disp(message);
 else
-    set(status_text_hnd,'String',message); drawnow;
+    try
+        set(status_text_hnd,'String',message); drawnow;
+    catch
+        disp(message);
+    end
 end
 
 end

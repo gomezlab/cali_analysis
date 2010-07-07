@@ -13,3 +13,5 @@ if (isempty(status_text_hnd))
 else
     set(status_text_hnd,'String',message); drawnow;
 end
+
+end

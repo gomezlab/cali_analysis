@@ -67,7 +67,7 @@ for i=1:length(image_files)
     imwrite(mask_highlight,fullfile(diagnostics_path,['mask_highlight_',name_no_ext,'.png']));
     
     pre_cali_cols = 1:cali_time;
-    post_cali_cols = (cali_time+1):size(this_image,1);
+    post_cali_cols = (cali_time+1):size(this_image,2);
     
     for j = pre_cali_cols
         this_image_col = this_image_no_scale(:,j);

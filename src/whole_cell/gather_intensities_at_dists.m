@@ -33,7 +33,6 @@ pixels_at_dists_post = cell(10000,1);
 dist_means = [];
 
 for k = 1:length(image_files)
-    
     I_file = fullfile(I_folder,image_files(k).name);
     
     [path, name, ext] = fileparts(I_file);
@@ -89,7 +88,6 @@ for k = 1:length(image_files)
         
     cell_highlight_movie = close(cell_highlight_movie);
     dist_highlight_movie = close(dist_highlight_movie);
-    
 end
 
 send_message(['STATUS: done examining image data']);

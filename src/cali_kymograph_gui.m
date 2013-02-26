@@ -146,11 +146,11 @@ for i=1:length(image_files)
         continue;
     end
     
-    [junk_1, name_no_ext, junk_2, junk_3] = fileparts(image_files(i).name); %#ok<NASGU>
+    [~, name_no_ext, ~] = fileparts(image_files(i).name);
     
     diagnostics_path = fullfile(I_folder,'diagnostics');
     
-    if (not(exist(diagnostics_path)))
+    if (not(exist(diagnostics_path,'dir')))
         mkdir(diagnostics_path);
     end
     try

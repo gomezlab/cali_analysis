@@ -12,6 +12,7 @@ my %opt;
 $opt{debug} = 0;
 GetOptions(\%opt, "template=s", "debug|d") or die;
 
+#template argument are the specific gui files in the non-shared sub-folders
 die "Unable to find template file (-template)" if not exists $opt{template};
 
 ################################################################################

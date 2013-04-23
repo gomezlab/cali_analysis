@@ -43,7 +43,6 @@ for k = 1:length(image_files)
     dist_highlight_movie = avifile(fullfile(fileparts(I_file),[name,'_dist_highlight.avi']));
     
     for i=1:image_num
-        
         this_image = imread(I_file,i);
         this_image_no_scale = this_image;
         max_pix_val = double(intmax(class(this_image)));

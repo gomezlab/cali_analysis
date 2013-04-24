@@ -1,5 +1,5 @@
 function cali_gui
-%Revision Number: 7883
+%Revision Number: 8017
 
 %  Create and then hide the GUI as it is being constructed.
 f = figure('Visible','off','Name','CALI Analysis','Units','normalized', ...
@@ -246,14 +246,14 @@ dlmwrite(fullfile(data_dir,'post_cali_mean_intensities.csv'),summary_post,'preci
 
 %Summary Figure
 temp_fig = figure('Visible','off');
-fig_hnd = errorbar(dist_means(1:length(summary_pre(1,:))), summary_pre(1,:), ...
-    summary_pre(1,:)-summary_pre(2,:), summary_pre(1,:)-summary_pre(3,:));
+fig_hnd = errorbar(dist_means(1:length(summary_pre(1,:))), summary_pre(2,:), ...
+    summary_pre(2,:)-summary_pre(3,:), summary_pre(2,:)-summary_pre(4,:));
 
 xlabel('Mean Distance from Nearest Cell Edge (\mum)')
 ylabel('Average Normalized Intensity (AU)')
 hold on;
-errorbar(dist_means(1:length(summary_post(1,:))), summary_post(1,:), ...
-    summary_post(1,:)-summary_post(2,:), summary_post(1,:)-summary_post(3,:),'r');
+errorbar(dist_means(1:length(summary_post(1,:))), summary_post(2,:), ...
+    summary_post(2,:)-summary_post(3,:), summary_post(2,:)-summary_post(4,:),'r');
 legend('Pre-Cali','Post-Cali')
 saveas(temp_fig,fullfile(data_dir,'cort_actin_intensity.pdf'))
 
@@ -261,17 +261,20 @@ send_message('STATUS: Done with processing extracted data');
 
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function pixel_summary = summarize_pixel_set(pixels_set)
 
 pixel_summary = zeros(5,length(pixels_set));
 
-first_dist_mean = mean(double(pixels_set{1}))
+first_dist_mean = mean(double(pixels_set{1}));
 for i=1:length(pixels_set)
 
 	%normalize the pixel values to the first distance mean
 	pixels_at_dist_norm = double(pixels_set{i})/first_dist_mean;
     pixel_summary(1,i) = mean(pixels_at_dist_norm);
-	disp(mean(pixels_set{i})/first_dist_mean);
     
 %     boot_temp = bootci(1000,{@mean,pixels_set{i}},'type','per');
     [h,pvalue,ci] = ttest(double(pixels_at_dist_norm));    

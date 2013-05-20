@@ -27,3 +27,11 @@ Caveats
 =======
 
 * These methods will not work if your images don't clearly idenfity the cell edge before and after perturbation. Currently, the methods only use the input image set to identify the cell edge. If your protein of interest doesn't mark the cell edge adequately, the distance from the cell edge binning won't work correctly. If there is demand, using a second marker which marks the cell body would be possible.
+
+
+Publication
+=========
+
+The software has been used in the following publication:
+
+* EA Vitriol, et al. Instantaneous Inactivation of Cofilin Reveals its Function of F-actin Disassembly in Lamellipodia. Mol Biol Cell, 2013 [HTML](http://dx.doi.org/10.1091/mbc.E13-03-0156)

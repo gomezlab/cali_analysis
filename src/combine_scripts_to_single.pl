@@ -18,16 +18,17 @@ die "Unable to find template file (-template)" if not exists $opt{template};
 ################################################################################
 # Main
 ################################################################################
-my $revision_num = &get_revision_number();
 
 open INPUT, "$opt{template}" or die $!;
 my @template_file = <INPUT>;
 close INPUT;
 
-my @temp = shift @template_file;
-push @temp, "%Revision Number: $revision_num\n";
-push @temp, @template_file;
-@template_file = @temp;
+# my $revision_num = &get_revision_number();
+# 
+# my @temp = shift @template_file;
+# push @temp, "%Revision Number: $revision_num\n";
+# push @temp, @template_file;
+# @template_file = @temp;
 
 my $template_filename = basename($opt{template});
 my $template_dirname = dirname($opt{template});
